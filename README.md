@@ -17,18 +17,33 @@ Automated WSL1-based Apache Guacamole installation with MariaDB authentication a
 
 ## Quick Start
 
-1. **Build the WSL distro:**
+1. **Clone this repository:**
+
+   ```powershell
+   git clone https://github.com/csphu/wsl-guacamole.git
+   cd wsl-guacamole
+   ```
+
+2. **Build and register the WSL distro:**
 
    ```powershell
    .\Build.ps1
    ```
 
-2. **Access Guacamole:**
-   - URL: <http://localhost:8080/guacamole/>
+
+3. **Access Guacamole:**
+   - The Guacamole WSL distro must be running to access the web interface.
+   - To start the distro from Windows:
+
+     ```powershell
+     wsl -d Guacamole
+     ```
+
+   - Then, in your web browser, go to: <http://localhost:8080/guacamole/>
    - Username: `guacadmin`
    - Password: `guacadmin`
 
-3. **Add connections:**
+4. **Add connections:**
    - Log in to Guacamole
    - Go to: Settings → Connections → New Connection
    - Configure your RDP/VNC/SSH connections
