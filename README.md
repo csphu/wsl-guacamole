@@ -2,8 +2,8 @@
 # WSL Guacamole
 
 ![MIT License](https://img.shields.io/badge/license-MIT-green.svg)
-![Last Commit](https://img.shields.io/github/last-commit/csphu/wsl-guacamole)
-![Issues](https://img.shields.io/github/issues/csphu/wsl-guacamole)
+![Last Commit](https://img.shields.io/github/last-commit/csphu/wsl-guacamole?style=flat)
+![Issues](https://img.shields.io/github/issues/csphu/wsl-guacamole?style=flat)
 
 Automated WSL1-based Apache Guacamole installation with MariaDB authentication and VPN support.
 
