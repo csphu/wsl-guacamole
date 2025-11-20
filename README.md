@@ -33,15 +33,9 @@ Automated WSL1-based Apache Guacamole installation with MariaDB authentication a
    - Go to: Settings → Connections → New Connection
    - Configure your RDP/VNC/SSH connections
 
-## VPN Integration
+## Why WSL1 Works Well for VPNs
 
-For connecting to servers via VPN:
-
-1. Configure RDP connection in Guacamole:
-   - Hostname: `127.205.125.124`
-   - Port: `9389`
-   - Security mode: `ANY`
-   - Ignore server certificate: `true`
+WSL1 uses the Windows network stack, allowing it to access all VPN connections, proxies, and custom loopback addresses configured on the Windows host. This makes it ideal for remote desktop gateways and similar tools that need to reach resources available only through a VPN or enterprise network.
 
 ## Architecture
 
