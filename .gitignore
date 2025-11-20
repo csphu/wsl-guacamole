@@ -1,0 +1,33 @@
+# Build artifacts
+BUILD_NUMBER
+*.tar
+*.gz
+*.wsl
+
+# Logs
+*.log
+logs/
+
+# Archives
+*.zip
+*.tar.gz
+*.tgz
+*.7z
+
+# Python
+__pycache__/
+*.pyc
+
+# Shell
+*.swp
+
+# VSCode
+.vscode/
+
+# Credentials & secrets
+*.env
+secrets*
+
+# WSL temp files
+*.bak
+*.tmp
