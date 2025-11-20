@@ -30,15 +30,15 @@ log_message() {
 }
 
 # ========== User Creation ==========
+
 USER="guac"
-PASSWORD='$6$McanchlqUns4b2EO$GLzhdpA2jGMZ1mKFISRnevsnG8Fuj3kbFdGAkGNcS27yOPku8eLi7aLknztGvsa4cErajmv0l6wc5fjr7HQIk0'
 
 log_message "task" "Create user '$USER'"
 if id "$USER" &>/dev/null; then
     log_message "ok" "User '$USER' already exists"
 else
-    useradd -m -s /usr/bin/bash -U --groups adm,dialout,cdrom,floppy,sudo,audio,dip,video,plugdev,netdev --password "$PASSWORD" "$USER"
-    log_message "changed" "User '$USER' created"
+    useradd -m -s /usr/bin/bash -U --groups adm,dialout,cdrom,floppy,sudo,audio,dip,video,plugdev,netdev "$USER"
+    log_message "changed" "User '$USER' created (password is locked; run 'passwd' after first login)"
 fi
 
 # ========== Sudoers Configuration ==========

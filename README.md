@@ -77,6 +77,16 @@ sudo service tomcat status
 - **Password:** guacamole_pass
 - **Admin User:** guacadmin / guacadmin
 
+## First Login: Set Your Password
+
+The default user is `guac`. After launching the distro for the first time, set your password by running:
+
+```bash
+passwd
+```
+
+You will then be able to use your chosen password for the `guac` user.
+
 ## Logs
 
 - **Tomcat:** `/opt/tomcat/apache-tomcat-9.0.112/logs/catalina.out`
