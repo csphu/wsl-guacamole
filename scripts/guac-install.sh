@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # ========== Logging Function ==========
 log_message() {
     local type="$1"
@@ -72,7 +74,24 @@ mkdir -p $guac_path
 cd $guac_path
 
 if [ ! -f "apache-tomcat-$tomcat_version.tar.gz" ]; then
-    wget https://dlcdn.apache.org/tomcat/tomcat-$tomcat_version_integer/v$tomcat_version/bin/apache-tomcat-$tomcat_version.tar.gz
+    tomcat_sources=(
+        "https://dlcdn.apache.org/tomcat/tomcat-$tomcat_version_integer/v$tomcat_version/bin/apache-tomcat-$tomcat_version.tar.gz"
+        "https://archive.apache.org/dist/tomcat/tomcat-$tomcat_version_integer/v$tomcat_version/bin/apache-tomcat-$tomcat_version.tar.gz"
+    )
+
+    tomcat_downloaded="false"
+    for tomcat_url in "${tomcat_sources[@]}"; do
+        if wget -O "apache-tomcat-$tomcat_version.tar.gz" "$tomcat_url"; then
+            tomcat_downloaded="true"
+            break
+        fi
+    done
+
+    if [ "$tomcat_downloaded" != "true" ]; then
+        echo "Failed to download Tomcat $tomcat_version from all sources" >&2
+        exit 1
+    fi
+
     log_message "changed" "Tomcat downloaded"
 else
     log_message "ok" "Tomcat archive already exists"
@@ -86,6 +105,11 @@ if [ ! -d "$tomcat_path/apache-tomcat-$tomcat_version" ]; then
     log_message "changed" "Tomcat extracted to $tomcat_path"
 else
     log_message "ok" "Tomcat already extracted"
+fi
+
+if [ ! -x "$tomcat_path/apache-tomcat-$tomcat_version/bin/startup.sh" ]; then
+    echo "Tomcat extraction incomplete: startup.sh not found at $tomcat_path/apache-tomcat-$tomcat_version/bin/startup.sh" >&2
+    exit 1
 fi
 
 # ========== Create Tomcat setenv.sh ==========
@@ -126,7 +150,12 @@ cat > /etc/init.d/tomcat <<'EOF'
 ### END INIT INFO
 
 TOMCAT_USER=tomcat
-TOMCAT_HOME=/opt/tomcat/apache-tomcat-9.0.112
+TOMCAT_HOME=$(find /opt/tomcat -maxdepth 1 -type d -name 'apache-tomcat-*' | sort -V | tail -n 1)
+
+if [ -z "$TOMCAT_HOME" ]; then
+    echo "Tomcat home not found under /opt/tomcat"
+    exit 1
+fi
 
 case $1 in
     start)

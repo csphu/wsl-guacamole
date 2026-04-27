@@ -39,7 +39,7 @@ Automated WSL1-based Apache Guacamole installation with MariaDB authentication a
      wsl -d Guacamole
      ```
 
-   - Then, in your web browser, go to: <http://localhost:8080/guacamole/>
+   - Then, in your web browser, go to: <http://localhost:9080/guacamole/>
    - Username: `guacadmin`
    - Password: `guacadmin`
 
@@ -98,7 +98,7 @@ You will then be able to use your chosen password for the `guac` user.
 
 ## Logs
 
-- **Tomcat:** `/opt/tomcat/apache-tomcat-9.0.112/logs/catalina.out`
+- **Tomcat:** `/opt/tomcat/apache-tomcat-*/logs/catalina.out`
 - **guacd:** `/var/log/guacd.log`
 - **MariaDB:** `/var/log/mysql/error.log`
 
@@ -129,7 +129,7 @@ sudo /usr/local/bin/start-guacamole.sh
 **Can't connect to Guacamole:**
 
 - Verify Tomcat is running: `sudo service tomcat status`
-- Check Tomcat logs: `sudo tail -100 /opt/tomcat/apache-tomcat-9.0.112/logs/catalina.out`
+- Check Tomcat logs: `sudo tail -100 /opt/tomcat/apache-tomcat-*/logs/catalina.out`
 
 **RDP connections failing:**
 
